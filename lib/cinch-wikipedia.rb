@@ -1,7 +1,2 @@
-require "cinch-wikipedia/version"
-
-module Cinch
-  module Wikipedia
-    # Your code goes here...
-  end
-end
+require "cinch/plugins/wikipedia/version.rb"
+require "cinch/plugins/wikipedia/wikipedia.rb"

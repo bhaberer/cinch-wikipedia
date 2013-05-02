@@ -1,6 +1,6 @@
-# Cinch::Wikipedia
+# Cinch::Plugins::Wikipedia
 
-TODO: Write a gem description
+Cinch plugin to query wikipedia.
 
 ## Installation
 
@@ -18,7 +18,13 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Just add th plugin to your list:
+
+    c.plugins.plugins = [Cinch::Plugins::Wikipedia]
+
+Then in channel use .wiki:
+
+    .wiki kitten
 
 ## Contributing
 
