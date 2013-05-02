@@ -20,7 +20,11 @@ Or install it yourself as:
 
 Just add th plugin to your list:
 
-    c.plugins.plugins = [Cinch::Plugins::Wikipedia]
+    @bot = Cinch::Bot.new do
+      configure do |c|
+        c.plugins.plugins = [Cinch::Plugins::Wikipedia]
+      end
+    end
 
 Then in channel use .wiki:
 
