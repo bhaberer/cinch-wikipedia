@@ -1,5 +1,7 @@
 # Cinch::Plugins::Wikipedia
 
+[![Code Climate](https://codeclimate.com/github/bhaberer/cinch-wikipedia.png)](https://codeclimate.com/github/bhaberer/cinch-wikipedia)
+
 Cinch plugin to query wikipedia.
 
 ## Installation
@@ -18,7 +20,7 @@ Or install it yourself as:
 
 ## Usage
 
-Just add th plugin to your list:
+Just add the plugin to your list:
 
     @bot = Cinch::Bot.new do
       configure do |c|
