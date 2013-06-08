@@ -1,5 +1,9 @@
 # Cinch::Plugins::Wikipedia
 
+[![Gem Version](https://badge.fury.io/rb/cinch-wikipedia.png)](http://badge.fury.io/rb/cinch-wikipedia)
+[![Dependency Status](https://gemnasium.com/bhaberer/cinch-wikipedia.png)](https://gemnasium.com/bhaberer/cinch-wikipedia)
+[![Build Status](https://travis-ci.org/bhaberer/cinch-wikipedia.png?branch=master)](https://travis-ci.org/bhaberer/cinch-wikipedia)
+[![Coverage Status](https://coveralls.io/repos/bhaberer/cinch-wikipedia/badge.png?branch=master)](https://coveralls.io/r/bhaberer/cinch-wikipedia?branch=master)
 [![Code Climate](https://codeclimate.com/github/bhaberer/cinch-wikipedia.png)](https://codeclimate.com/github/bhaberer/cinch-wikipedia)
 
 Cinch plugin to query wikipedia.
