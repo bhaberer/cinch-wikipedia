@@ -14,6 +14,11 @@ module Cinch::Plugins
     match /wiki (.*)/
     match /wikipedia (.*)/
 
+    def initialize(*args)
+      super
+      @max_length = config[:max_length] || 300
+    end
+
     def execute(m, term)
       m.reply get_def(term)
     end
@@ -26,12 +31,25 @@ module Cinch::Plugins
       url = "http://en.wikipedia.org/w/index.php?search=#{term}"
 
       # Grab the text
-      text = Cinch::Toolbox.get_html_element(url, '#mw-content-text p')
+      wiki_text = Cinch::Toolbox.get_html_element(url, '#mw-content-text p')
 
-      # Truncate if it's super long
-      text = Cinch::Toolbox.truncate(text, 300)
+      # Check for search errors
+      if wiki_text.include?('For search options, see Help:Searching.')
+        msg = "I couldn't find anything for that search"
+        if alt_term_text = Cinch::Toolbox.get_html_element(url, '.searchdidyoumean')
+          alt_term = alt_term_text[/\ADid you mean: (\w+)\z/, 1]
+          msg << ", did you mean '#{alt_term}'?"
+        else
+          msg << ", sorry!"
+        end
+        return msg
+      end
 
-      return "Wikipedia ∴ #{text} [#{Cinch::Toolbox.shorten(url)}]"
+      # Truncate text and url if they are too long
+      text = Cinch::Toolbox.truncate(wiki_text, @max_length)
+      url  = Cinch::Toolbox.shorten(url)
+
+      return "Wikipedia ∴ #{text} [#{url}]"
     end
   end
 end

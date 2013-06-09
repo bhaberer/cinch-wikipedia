@@ -43,3 +43,9 @@ Then in channel use .wiki:
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create new Pull Request
+
+## Changelog
+
+* v0.0.6
+    * Updated `Cinch::Toolbox.get_html_element` to not raise an Exception on css entities not
+      existing in the page, it will now instead return `Nil`.
