@@ -13,8 +13,13 @@ describe Cinch::Plugins::Wikipedia do
   end
 
   it 'should not return multiple lined definitions'
-  it 'should not return definitions that are longer than 300 chars'
 
+  it 'should not return definitions that are longer than 250 chars' do
+    @plugin.send(:get_def, 'Teenager').length.
+      should == 250
+  end
+
+  # Not found
   it 'should return an error message when a term is not found' do
     @plugin.send(:get_def, 'dasdafasfasfasfasafsdfsdfsadf').
       should include("I couldn't find anything for that search, sorry!")
@@ -25,6 +30,7 @@ describe Cinch::Plugins::Wikipedia do
       should include("I couldn't find anything for that search, did you mean 'smegma'?")
   end
 
+  # disambiguation
   it 'should return helful information when a disambuation page'
 
 end
