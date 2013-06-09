@@ -46,6 +46,6 @@ Then in channel use .wiki:
 
 ## Changelog
 
-* v0.0.6
-    * Updated `Cinch::Toolbox.get_html_element` to not raise an Exception on css entities not
-      existing in the page, it will now instead return `Nil`.
+* v1.0.0
+    * Added checks for terms that are not found and disambig pages.
+    * Tests!
