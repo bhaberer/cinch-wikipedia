@@ -30,19 +30,15 @@ module Cinch::Plugins
       term = URI.escape(term, Regexp.new("[^#{URI::PATTERN::UNRESERVED}]"))
       url = "http://en.wikipedia.org/w/index.php?search=#{term}"
 
-      # Grab the text
-      wiki_text = Cinch::Toolbox.get_html_element(url, '#mw-content-text p')
+      cats = Cinch::Toolbox.get_html_element(url, '#mw-normal-catlinks')
+      if cats && cats.include?('Disambiguation')
+        wiki_text = "'#{term} is too vague and lead to a disambiguation page."
+      else
+        # Grab the text
+        wiki_text = Cinch::Toolbox.get_html_element(url, '#mw-content-text p')
 
-      # Check for search errors
-      if wiki_text.include?('For search options, see Help:Searching.')
-        msg = "I couldn't find anything for that search"
-        if alt_term_text = Cinch::Toolbox.get_html_element(url, '.searchdidyoumean')
-          alt_term = alt_term_text[/\ADid you mean: (\w+)\z/, 1]
-          msg << ", did you mean '#{alt_term}'?"
-        else
-          msg << ", sorry!"
-        end
-        return msg
+        # Check for search errors
+        return not_found(wiki_text, url) if wiki_text.include?('Help:Searching')
       end
 
       # Truncate text and url if they are too long
@@ -50,6 +46,17 @@ module Cinch::Plugins
       url  = Cinch::Toolbox.shorten(url)
 
       return "Wikipedia ∴ #{text} [#{url}]"
+    end
+
+    def not_found(wiki_text, url)
+      msg = "I couldn't find anything for that search"
+      if alt_term_text = Cinch::Toolbox.get_html_element(url, '.searchdidyoumean')
+        alt_term = alt_term_text[/\ADid you mean: (\w+)\z/, 1]
+        msg << ", did you mean '#{alt_term}'?"
+      else
+        msg << ", sorry!"
+      end
+      return msg
     end
   end
 end

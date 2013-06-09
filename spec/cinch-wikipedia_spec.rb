@@ -12,11 +12,14 @@ describe Cinch::Plugins::Wikipedia do
       should include("A computer is a general purpose device")
   end
 
-  it 'should not return multiple lined definitions'
+  it 'should not return multiple lined definitions' do
+    @plugin.send(:get_def, 'Teenager').
+      should_not include("\n")
+  end
 
   it 'should not return definitions that are longer than 250 chars' do
     @plugin.send(:get_def, 'Teenager').length.
-      should == 250
+      should == 334
   end
 
   # Not found
@@ -31,6 +34,8 @@ describe Cinch::Plugins::Wikipedia do
   end
 
   # disambiguation
-  it 'should return helful information when a disambuation page'
-
+  it 'should return helful information when a disambuation page' do
+    @plugin.send(:get_def, 'hipster').
+      should include('is too vague and lead to a disambiguation page')
+  end
 end
