@@ -38,7 +38,7 @@ module Cinch::Plugins
         wiki_text = Cinch::Toolbox.get_html_element(url, '#mw-content-text p')
 
         # Check for search errors
-        return not_found(wiki_text, url) if wiki_text.include?('Help:Searching')
+        return not_found(wiki_text, url) if wiki_text.nil? || wiki_text.include?('Help:Searching')
       end
 
       # Truncate text and url if they are too long

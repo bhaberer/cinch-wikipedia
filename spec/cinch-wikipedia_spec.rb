@@ -35,7 +35,7 @@ describe Cinch::Plugins::Wikipedia do
 
   # disambiguation
   it 'should return helful information when a disambuation page' do
-    @plugin.send(:get_def, 'hipster').
+    @plugin.send(:get_def, 'hacker').
       should include('is too vague and lead to a disambiguation page')
   end
 end
