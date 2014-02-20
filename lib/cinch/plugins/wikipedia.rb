@@ -4,12 +4,13 @@ require 'cinch/toolbox'
 require 'cinch/cooldown'
 
 module Cinch::Plugins
+  # Plugin to allow users to search wikipedia.
   class Wikipedia
     include Cinch::Plugin
 
     enforce_cooldown
 
-    self.help = "Use .wiki <term> to see the Wikipedia info for that term."
+    self.help = 'Use .wiki <term> to see the Wikipedia info for that term.'
 
     match /wiki (.*)/
     match /wikipedia (.*)/
@@ -20,43 +21,46 @@ module Cinch::Plugins
     end
 
     def execute(m, term)
-      m.reply get_def(term)
+      m.reply wiki(term)
     end
 
     private
 
-    def get_def(term)
+    def wiki(term)
       # URI Encode
       term = URI.escape(term, Regexp.new("[^#{URI::PATTERN::UNRESERVED}]"))
       url = "http://en.wikipedia.org/w/index.php?search=#{term}"
 
+      # Truncate text and url if they are too long
+      text = Cinch::Toolbox.truncate(get_def(term, url), @max_length)
+      url  = Cinch::Toolbox.shorten(url)
+
+      "Wikipedia ∴ #{text} [#{url}]"
+    end
+
+    def get_def(term, url)
       cats = Cinch::Toolbox.get_html_element(url, '#mw-normal-catlinks')
       if cats && cats.include?('Disambiguation')
         wiki_text = "'#{term} is too vague and lead to a disambiguation page."
       else
-        # Grab the text
         wiki_text = Cinch::Toolbox.get_html_element(url, '#mw-content-text p')
-
-        # Check for search errors
-        return not_found(wiki_text, url) if wiki_text.nil? || wiki_text.include?('Help:Searching')
+        if wiki_text.nil? || wiki_text.include?('Help:Searching')
+          return not_found(wiki_text, url)
+        end
       end
-
-      # Truncate text and url if they are too long
-      text = Cinch::Toolbox.truncate(wiki_text, @max_length)
-      url  = Cinch::Toolbox.shorten(url)
-
-      return "Wikipedia ∴ #{text} [#{url}]"
+      wiki_text
     end
 
     def not_found(wiki_text, url)
-      msg = "I couldn't find anything for that search"
-      if alt_term_text = Cinch::Toolbox.get_html_element(url, '.searchdidyoumean')
+      msg = "I couldn't find anything for that search, "
+      alt_term_text = Cinch::Toolbox.get_html_element(url, '.searchdidyoumean')
+      if alt_term_text
         alt_term = alt_term_text[/\ADid you mean: (\w+)\z/, 1]
-        msg << ", did you mean '#{alt_term}'?"
+        msg << "did you mean '#{alt_term}'?"
       else
-        msg << ", sorry!"
+        msg << 'sorry!'
       end
-      return msg
+      msg
     end
   end
 end
