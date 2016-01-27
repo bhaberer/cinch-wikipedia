@@ -1,23 +1,28 @@
 language: ruby
 env:
   global:
-    - "JRUBY_OPTS=-Xcext.enabled=true"
+  - JRUBY_OPTS=-Xcext.enabled=true
+  - secure: KZ7+7ZDFqMcx3cqeaqojnVWPqZM4DByfyg0FShsGYCp+A/z3ZJ6qIQ4ctZYMCdThhrB3kpkTqFYMO+xFOmhfBx2Sz4yjLnK+m/ur6p2VeOPQflcXcYvdjrFZdDV99bkGMe9ElX3DbwQFHGdhdgNOkxeiTub8GSDm5dSE/SFaVno=
 rvm:
-  - 2.1.0
-  - 2.0.0
-  - 1.9.3
-  - 1.9.2
-  - 1.8.7
-  - jruby-18mode
-  - jruby-19mode
-  - ruby-head
-  - jruby-head
-  - ree
+- 1.8.7
+- 1.9.2
+- 1.9.3
+- 2.0.0
+- 2.1.0
+- 2.2.0
+- 2.3.0
+- jruby-18mode
+- jruby-19mode
+- ruby-head
+- jruby-head
+- ree
 matrix:
   allow_failures:
-    - rvm: 1.8.7
-    - rvm: ree
-    - rvm: jruby-18mode
-    - rvm: jruby-19mode
-    - rvm: jruby-head
+  - rvm: 1.8.7
+  - rvm: 1.9.2
+  - rvm: 1.9.3
+  - rvm: ree
+  - rvm: jruby-18mode
+  - rvm: jruby-19mode
+  - rvm: jruby-head
   fast_finish: true

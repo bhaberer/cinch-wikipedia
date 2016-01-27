@@ -10,7 +10,7 @@ describe Cinch::Plugins::Wikipedia do
   # normal queries
   it 'should return a definition of a term' do
     expect(get_replies(make_message(@bot, '!wiki computer')).first.text)
-      .to include("A computer is a general purpose device")
+      .to include('A computer is a general purpose device')
   end
 
   it 'should return a definition of a term for each version of cmd' do
