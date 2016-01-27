@@ -25,6 +25,6 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency 'codeclimate-test-reporter'
 
   gem.add_dependency 'cinch', '~> 2'
-  gem.add_dependency 'cinch-cooldown', '~> 1.1', '>= 1.1.1'
+  gem.add_dependency 'cinch-cooldown', '1.1.5'
   gem.add_dependency 'cinch-toolbox', '~> 1.1'
 end
