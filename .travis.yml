@@ -2,7 +2,9 @@ language: ruby
 env:
   global:
   - JRUBY_OPTS=-Xcext.enabled=true
-  - secure: KZ7+7ZDFqMcx3cqeaqojnVWPqZM4DByfyg0FShsGYCp+A/z3ZJ6qIQ4ctZYMCdThhrB3kpkTqFYMO+xFOmhfBx2Sz4yjLnK+m/ur6p2VeOPQflcXcYvdjrFZdDV99bkGMe9ElX3DbwQFHGdhdgNOkxeiTub8GSDm5dSE/SFaVno=
+addons:
+  code_climate:
+    repo_token: 98c232a9c4c981422cb820cba084e22b165f97f118f128351a525ca5083a7f68
 rvm:
 - 1.8.7
 - 1.9.2
