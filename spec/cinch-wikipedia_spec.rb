@@ -37,8 +37,8 @@ describe Cinch::Plugins::Wikipedia do
   end
 
   it 'should provide suggestions if one is listed on the page' do
-    expect(get_replies(make_message(@bot, '!wiki smegama')).first.text)
-      .to include("I couldn't find anything for that search, did you mean 'smegma'?")
+    expect(get_replies(make_message(@bot, '!wiki cliinton')).first.text)
+      .to include("I couldn't find anything for that search, did you mean 'clinton'?")
   end
 
   # disambiguation
