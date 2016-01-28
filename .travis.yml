@@ -1,30 +1,32 @@
+addons:
+    code_climate:
+        repo_token: 98c232a9c4c981422cb820cba084e22b165f97f118f128351a525ca5083a7f68
 language: ruby
+before_install:
+  - gem update --system
+  - gem update bundler
 env:
   global:
-  - JRUBY_OPTS=-Xcext.enabled=true
-addons:
-  code_climate:
-    repo_token: 98c232a9c4c981422cb820cba084e22b165f97f118f128351a525ca5083a7f68
+    - "JRUBY_OPTS=-Xcext.enabled=true"
 rvm:
-- 1.8.7
-- 1.9.2
-- 1.9.3
-- 2.0.0
-- 2.1.0
-- 2.2.0
-- 2.3.0
-- jruby-18mode
-- jruby-19mode
-- ruby-head
-- jruby-head
-- ree
+  - 1.8.7
+  - 1.9.2
+  - 1.9.3
+  - 2.0.0
+  - 2.1.0
+  - 2.2.0
+  - jruby-18mode
+  - jruby-19mode
+  - ruby-head
+  - jruby-head
+  - ree
 matrix:
   allow_failures:
-  - rvm: 1.8.7
-  - rvm: 1.9.2
-  - rvm: 1.9.3
-  - rvm: ree
-  - rvm: jruby-18mode
-  - rvm: jruby-19mode
-  - rvm: jruby-head
+    - rvm: 1.8.7
+    - rvm: 1.9.2
+    - rvm: 1.9.3
+    - rvm: ree
+    - rvm: jruby-18mode
+    - rvm: jruby-19mode
+    - rvm: jruby-head
   fast_finish: true
