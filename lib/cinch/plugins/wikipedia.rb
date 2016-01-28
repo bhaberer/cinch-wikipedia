@@ -41,14 +41,14 @@ module Cinch
       def get_def(term, url)
         cats = Cinch::Toolbox.get_html_element(url, '#mw-normal-catlinks')
         if cats && cats.include?('Disambiguation')
-          wiki_text = "'#{term} is too vague and lead to a disambiguation page."
+          return "'#{term} is too vague and lead to a disambiguation page."
         else
-          wiki_text = Cinch::Toolbox.get_html_element(url, '#mw-content-text p')
-          if wiki_text.nil? || wiki_text.include?('Help:Searching')
+          wiki_text = Cinch::Toolbox.get_html_element(url, '#mw-content-text/p')
+          if wiki_text.nil?
             return not_found(url)
           end
+          return wiki_text
         end
-        wiki_text
       end
 
       def not_found(url)
