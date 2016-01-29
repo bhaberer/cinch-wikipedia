@@ -1,6 +1,6 @@
 addons:
-    code_climate:
-        repo_token: 98c232a9c4c981422cb820cba084e22b165f97f118f128351a525ca5083a7f68
+  code_climate:
+    repo_token: 98c232a9c4c981422cb820cba084e22b165f97f118f128351a525ca5083a7f68
 language: ruby
 before_install:
   - gem update --system
@@ -15,6 +15,7 @@ rvm:
   - 2.0.0
   - 2.1.0
   - 2.2.0
+  - 2.3.0
   - jruby-18mode
   - jruby-19mode
   - ruby-head
@@ -29,4 +30,5 @@ matrix:
     - rvm: jruby-18mode
     - rvm: jruby-19mode
     - rvm: jruby-head
+    - rvm: ruby-head
   fast_finish: true
